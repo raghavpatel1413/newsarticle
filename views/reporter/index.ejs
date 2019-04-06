@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+		<title>News App</title>
+	</head>
+	<body class="container">
+		<form action="/addNews" method="POST">
+			<div class="form-group">
+				<h1>News Reporter</h1>
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="News Title" name="title">
+			</div>
+			<div class="form-group">
+				<textarea class="form-control" rows="5" placeholder="News Description" name="desc"></textarea>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<input type="date" class="form-control" placeholder="News Date" name="date">
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<input type="date" class="form-control" placeholder="Created At" name="created_at">
+					</div>
+				</div>
+			</div>
+			<div class="input-group mb-3">
+				<div class="input-group-prepend">
+					<span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+				</div>
+				<div class="custom-file">
+					<input type="file" class="custom-file-input" id="news_img" name="news_img" aria-describedby="inputGroupFileAddon01">
+					<label class="custom-file-label" for="news_img">Choose file</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<select name="select_type" class="form-control">
+					<option value="Business">Business</option>
+					<option value="General">General</option>
+					<option value="Auto">Auto</option>
+					<option value="Tech">Tech</option>
+					<option value="Legal">Legal</option>
+					<option value="Crime">Crime</option>
+					<option value="National">National</option>
+					<option value="International">International</option>
+					<option value="Lifestyle">Lifestyle</option>
+					<option value="Art">Art</option>
+					<option value="Entertainment">Entertainment</option>
+					<option value="Sports">Sports</option>
+					<option value="Legal">Legal</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-success btn-block">Add News</button>
+			</div>
+		</form>
+		<div class="table-responsive table-hover">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Index</th>
+						<th scope="col">Image</th>
+						<th scope="col">Title</th>
+						<th scope="col">Body</th>
+						<th scope="col">Category</th>
+						<th scope="col">Date fo Happen</th>
+						<th scope="col">Date of create</th>
+						<th scope="col">Edit</th>
+						<th scope="col">Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% for(var i=0; i<news.length; i++) {%>
+						<tr>
+							<td><%= i+1 %></td>
+							<td><%= news[i].news_img %></td>
+							<td><%= news[i].title %></td>
+							<td><%= news[i].desc %></td>
+							<td><%= news[i].select_type %></td>
+							<td><%= news[i].date %></td>
+							<td><%= news[i].created_at %></td>
+							<td><button type="button" class="btn btn-primary">Edit</button></td>
+							<td><button type="button" id="deleteNews" class="btn btn-danger">Delete</button></td>
+						</tr>
+					<% } %>
+				</tbody>
+			</table>
+		</div>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+	</body>
+</html>
