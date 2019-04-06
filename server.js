@@ -17,7 +17,7 @@ app.use("/public",express.static(__dirname + '/public'));
 MongoClient.connect('mongodb://raghavpatel1413:Raghav74@ds125574.mlab.com:25574/news', (err, client) => {
 	if (err) return console.log(err)
 	db = client.db('news') // whatever your database name is
-	app.listen(3000, () => {
+	app.listen(process.env.PORT || 3000, () => {
 	console.log('listening on 3000')
 	})
 })
