@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
 app.get('/login', (req, res) => {
 	if(req.session.usr == 1)
 	{
-		res.render('editor/index.ejs')
+		res.redirect('/approvenews');
 	}
 	else if(req.session.usr == 2)
 	{
@@ -58,7 +58,7 @@ app.post('/loginCon', (req, res) => {
 				if(result[i].email == req.body.email && result[i].password == req.body.password && result[i].type == 1)
 				{
 					req.session.usr = 1;
-					res.render('editor/index.ejs')
+					res.redirect('/approvenews')
 				}
 				else if(result[i].email == req.body.email && result[i].password == req.body.password && result[i].type == 2)
 				{
@@ -109,3 +109,24 @@ app.delete('/deleteNews/', (req, res) => {
 })
 
 //Editor
+app.get('/approvenews', (req, res) => {
+	if(req.session.usr == 1)
+	{
+		db.collection('news').find().toArray((err, result) => {
+		if (err) return console.log(err)
+		res.render('editor/index.ejs', {news: result})
+		})
+	}
+	else
+	{
+		res.redirect('/login');
+	}
+})
+
+app.post('/changestatus', (req, res) => {	
+	db.collection("news").updateOne({ "_id": req.body.id }, { $set: { "status": "success" } } , function(err, res) {
+		if (err) throw err;
+		console.log("1 document updated");
+	});
+	res.redirect('/approvenews');
+})
